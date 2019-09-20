@@ -1,13 +1,19 @@
 let player
 let zombie
 let sprites = []
+let items = []
 
 function setup() {
   createCanvas(400, 400);
   player = new Player()
-  zombie = new Sprite(width -10, height / 2, "red")
+  zombie = new Zombie()
   sprites.push(player)
   sprites.push(zombie)
+  for (let i = 0; i < 12; i++) {
+    let item = new Item("potion", Math.random() * 5 )
+    sprites.push(item)
+    items.push(item)
+  }
 }
 
 function draw() {
@@ -19,7 +25,7 @@ function draw() {
 }
 
 function keyPressed() {
-  player.keyPressed(keyCode)
+  player.keyPressed()
 }
 
 function keyReleased() {

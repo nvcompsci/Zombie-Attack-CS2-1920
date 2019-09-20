@@ -2,7 +2,7 @@ class Player extends Sprite {
   constructor() {
     super(10, height / 2, "black")
   }
-  keyPressed(keyCode) {
+  keyPressed() {
     if (keyCode === UP_ARROW) {
       this.move(0, -1)
     }

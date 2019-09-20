@@ -26,8 +26,17 @@ function draw() {
 
 function keyPressed() {
   player.keyPressed()
+  if (keyCode === 32)
+    player.attack(zombie)
 }
 
 function keyReleased() {
   player.stop()
+}
+
+function checkCC(x, y,d, x2, y2, d2, b = 0) {
+  if( dist(x,y,x2,y2) <= (d/2)+(d2/2) + b){
+    return true;
+  }
+  return false;
 }

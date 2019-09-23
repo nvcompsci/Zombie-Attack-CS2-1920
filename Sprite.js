@@ -8,10 +8,14 @@ class Sprite {
     this.height = 50
     this.color = c
     this.SPEED = 5
+    this.active = true
   }
   draw() {
     fill(this.color)
     ellipse(this.x, this.y, this.width, this.height)
+  }
+  die() {
+    this.active = false
   }
   move(dx, dy) {
     this.vx = dx * this.SPEED

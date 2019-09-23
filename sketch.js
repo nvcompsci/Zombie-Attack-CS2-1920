@@ -18,10 +18,15 @@ function setup() {
 
 function draw() {
   background(220);
-  sprites.forEach(sprite => {
+  sprites.filter(sprite => sprite.active).forEach(sprite => {
     sprite.update()
     sprite.draw()
   })
+  checkCollisions()
+}
+
+function checkCollisions() {
+  
 }
 
 function keyPressed() {

@@ -32,6 +32,7 @@ function checkCollisions() {
   for (let i = 0; i < items.length; i++) {
      let item = items[i]
      player.collect(item)
+    zombie.collect(item)
   }
 }
 

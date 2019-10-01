@@ -22,12 +22,20 @@ function draw() {
     sprite.update()
     sprite.draw()
   })
+  if (!player.active) {
+      text("Game Over!",width/2,height/2)
+  }
   checkCollisions()
 }
 
 function checkCollisions() {
-  if (zombie.alive &&  checkCC(zombie.x, zombie.y, zombie.width, player.x, player.y, player.width) ) {
-      player.health -= 50
+  if (zombie.active &&  checkCC(zombie.x, zombie.y, zombie.width, player.x, player.y, player.width) ) {
+    
+    player.health -= 3
+      if (player.health <= 0) {
+        
+          player.die()
+      }
   }
   for (let i = 0; i < items.length; i++) {
      let item = items[i]

@@ -4,6 +4,7 @@ class Player extends Sprite {
     this.score = 0
     this.xp = 0
     this.hp = 0
+    this.health = 100
   }
 
   attack(z) {
@@ -15,7 +16,12 @@ class Player extends Sprite {
   }
   
   collect(item) {
-    
+    if ( item.active && checkCC(this.x, this.y, this.width, item.x, item.y, item.width) ) {
+        item.die()
+        this.score += 10
+        this.xp += 10
+        this.health += item.effect
+    }
   }
 
   keyPressed() {

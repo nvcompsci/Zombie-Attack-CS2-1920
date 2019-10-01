@@ -29,7 +29,10 @@ function checkCollisions() {
   if (zombie.alive &&  checkCC(zombie.x, zombie.y, zombie.width, player.x, player.y, player.width) ) {
       player.health -= 50
   }
-  
+  for (let i = 0; i < items.length; i++) {
+     let item = items[i]
+     player.collect(item)
+  }
 }
 
 function keyPressed() {

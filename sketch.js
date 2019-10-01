@@ -1,62 +1,38 @@
-let player
-let zombie
-let sprites = []
-let items = []
-
-function setup() {
-  createCanvas(400, 400);
-  player = new Player()
-  zombie = new Zombie()
-  sprites.push(player)
-  sprites.push(zombie)
-  for (let i = 0; i < 12; i++) {
-    let item = new Item("potion", Math.random() * 5 )
-    sprites.push(item)
-    items.push(item)
+class Sprite {
+  constructor(x, y, c) {
+    this.x = x
+    this.y = y
+    this.vx = 0;
+    this.vy = 0;
+    this.width = 50
+    this.height = 50
+    this.color = c
+    this.SPEED = 5
+    this.active = true
   }
-}
-
-function draw() {
-  background(220);
-  sprites.filter(sprite => sprite.active).forEach(sprite => {
-    sprite.update()
-    sprite.draw()
-  })
-  if (!player.active) {
-      text("Game Over!",width/2,height/2)
+  draw() {
+    fill(this.color)
+    ellipse(this.x, this.y, this.width, this.height)
   }
-  checkCollisions()
-}
-
-function checkCollisions() {
-  if (zombie.active &&  checkCC(zombie.x, zombie.y, zombie.width, player.x, player.y, player.width) ) {
-    
-    player.health -= 3
-      if (player.health <= 0) {
-        
-          player.die()
-      }
+  die() {
+    this.active = false
   }
-  for (let i = 0; i < items.length; i++) {
-     let item = items[i]
-     player.collect(item)
-    zombie.collect(item)
+  move(dx, dy) {
+    this.vx = dx * this.SPEED
+    this.vy = dy * this.SPEED
   }
-}
-
-function keyPressed() {
-  player.keyPressed()
-  if (keyCode === 32)
-    player.attack(zombie)
-}
-
-function keyReleased() {
-  player.stop()
-}
-
-function checkCC(x, y,d, x2, y2, d2, b = 0) {
-  if( dist(x,y,x2,y2) <= (d/2)+(d2/2) + b){
-    return true;
+  update() {
+    if (this.x <= this.width/2 || this.x >= 400- this.height/2) {
+        this.vx = -this.vx
+    }
+    if (this.y <= this.width/2 || this.y >= 400-this.height/2) {
+        this.vy = -this.vy
+    }
+    this.x += this.vx
+    this.y += this.vy
   }
-  return false;
+  stop() {
+    this.vx = 0
+    this.vy = 0
+  }
 }
